@@ -13,7 +13,16 @@ const routes: Routes = [
   },
   {
     path: 'registros',
-    loadChildren: () => import('./registros/registros.module').then( m => m.RegistrosPageModule)
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./registros/registros.module').then( m => m.RegistrosPageModule)
+      }, 
+      {
+        path: ':registroId',
+        loadChildren: () => import('./registros/detalle-registro/detalle-registro.module').then( m => m.DetalleRegistroPageModule)
+      }
+    ]
   },
 ];
 
