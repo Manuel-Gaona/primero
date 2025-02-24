@@ -1,13 +1,49 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>detalle-registro</ion-title>
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons  slot="start">
+      <ion-back-button defaultHref="registros/">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ registro.nombre }}</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="deleteRegistro()">
+        <ion-icon  name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
+   
+<ion-content>
+  <ion-grid class="ion-no-padding">
+   
+    <ion-row>
+      <ion-col class="ion-no-padding">
+        <ion-img [src]="registro.foto"></ion-img>
+      </ion-col>
+    </ion-row> 
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">detalle-registro</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <ion-row>
+      <ion-col>
+        <h1 class="ion-text-center">{{ registro.nombre }}</h1>
+      </ion-col>
+    </ion-row>
+    
+    <ion-row>
+      <ion-col>
+        <ion-list *ngIf="registro.observaciones.length > 0; else sinObservaciones">
+          <ion-item *ngFor="let observacion of registro.observaciones">
+            {{ observacion }}
+          </ion-item>
+        </ion-list>
+        <ng-template #sinObservaciones>
+          <ion-text>
+            <p class="ion-text-center">Sin observaciones</p>
+          </ion-text>
+        </ng-template>
+      </ion-col>
+    </ion-row>
+   
+  </ion-grid>
+   
 </ion-content>
